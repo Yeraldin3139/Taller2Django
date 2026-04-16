@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solicitud Enviada</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow: hidden;
+        }
+
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: #f5576c;
+            position: absolute;
+            animation: confetti-fall 3s linear infinite;
+        }
+
+        @keyframes confetti-fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .confirmation-container {
+            background: white;
+            border-radius: 25px;
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.35);
+            max-width: 650px;
+            width: 100%;
+            padding: 55px 45px;
+            text-align: center;
+            animation: zoomIn 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .confirmation-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, #f093fb, #f5576c, #fa709a, #fee140);
+        }
+
+        @keyframes zoomIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.5) rotate(-5deg);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) rotate(0deg);
+            }
+        }
+
+        .success-icon {
+            font-size: 6em;
+            margin-bottom: 25px;
+            animation: bounce 1s ease-in-out infinite;
+            display: inline-block;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        h1 {
+            color: #f5576c;
+            margin-bottom: 18px;
+            font-size: 3em;
+            font-weight: 800;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .message {
+            color: #555;
+            font-size: 1.25em;
+            margin-bottom: 35px;
+            line-height: 1.7;
+            font-weight: 400;
+        }
+
+        .info-card {
+            background: linear-gradient(135deg, #fff5f7 0%, #ffe0e6 100%);
+            border-radius: 18px;
+            padding: 30px;
+            margin: 35px 0;
+            border: 2px solid #ffc9d3;
+            box-shadow: 0 8px 20px rgba(245, 87, 108, 0.15);
+        }
+
+        .info-card p {
+            color: #c7254e;
+            font-size: 1.05em;
+            margin: 12px 0;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn-container {
+            display: flex;
+            gap: 18px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 35px;
+        }
+
+        .btn {
+            padding: 16px 35px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.05em;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            box-shadow: 0 8px 20px rgba(245, 87, 108, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(245, 87, 108, 0.4);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            color: #333;
+            box-shadow: 0 8px 20px rgba(250, 112, 154, 0.3);
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(250, 112, 154, 0.4);
+        }
+
+        .decorative-circle {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.1;
+        }
+
+        .circle-1 {
+            width: 200px;
+            height: 200px;
+            background: #f5576c;
+            top: -100px;
+            right: -100px;
+        }
+
+        .circle-2 {
+            width: 150px;
+            height: 150px;
+            background: #f093fb;
+            bottom: -75px;
+            left: -75px;
+        }
+
+        @media (max-width: 768px) {
+            .confirmation-container {
+                padding: 40px 28px;
+            }
+
+            h1 {
+                font-size: 2.3em;
+            }
+
+            .success-icon {
+                font-size: 4.5em;
+            }
+
+            .btn-container {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="confirmation-container">
+        <div class="decorative-circle circle-1"></div>
+        <div class="decorative-circle circle-2"></div>
+        
+        <div class="success-icon">🎉</div>
+        <h1>¡Solicitud Enviada!</h1>
+        <p class="message">
+            Su solicitud ha sido recibida y registrada exitosamente en nuestro sistema.
+            Nos pondremos en contacto con usted a la brevedad.
+        </p>
+
+        <div class="info-card">
+            <p>✅ Solicitud procesada correctamente</p>
+            <p>📧 Recibirá una confirmación por correo electrónico</p>
+            <p>⏱️ Tiempo estimado de respuesta: 24-48 horas</p>
+            <p>🔍 Puede consultar el estado en el panel de administración</p>
+        </div>
+
+        <div class="btn-container">
+            <a href="{% url 'solicitudes:crear' %}" class="btn btn-primary">
+                Nueva Solicitud
+            </a>
+            <a href="/admin/" class="btn btn-secondary">
+                Panel de Administración
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Crear confetti animado
+        function createConfetti() {
+            const colors = ['#f5576c', '#f093fb', '#fa709a', '#fee140'];
+            for (let i = 0; i < 50; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + '%';
+                confetti.style.animationDelay = Math.random() * 3 + 's';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                document.body.appendChild(confetti);
+                
+                setTimeout(() => confetti.remove(), 3000);
+            }
+        }
+        
+        createConfetti();
+    </script>
+</body>
+</html>
