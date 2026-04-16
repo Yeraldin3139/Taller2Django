@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Asistencia</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 700px;
+            width: 100%;
+            padding: 40px;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            color: #667eea;
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+            font-weight: 700;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 600;
+            font-size: 0.95em;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1em;
+            transition: all 0.3s ease;
+            background-color: #f8f9fa;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #667eea;
+            background-color: white;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            background: #f0f4ff;
+            border-radius: 10px;
+            margin-top: 10px;
+        }
+
+        .form-check-input {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+            cursor: pointer;
+            accent-color: #667eea;
+        }
+
+        .checkbox-label {
+            margin: 0;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-submit:active {
+            transform: translateY(0);
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .icon {
+            display: inline-block;
+            margin-right: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                padding: 25px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📋 Registro de Asistencia</h1>
+        <p class="subtitle">Complete el formulario con sus datos</p>
+        
+        <form method="post">
+            {% csrf_token %}
+            
+            <div class="form-group">
+                <label for="{{ form.nombre_completo.id_for_label }}">
+                    <span class="icon">👤</span>{{ form.nombre_completo.label }}
+                </label>
+                {{ form.nombre_completo }}
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="{{ form.documento_identidad.id_for_label }}">
+                        <span class="icon">🆔</span>{{ form.documento_identidad.label }}
+                    </label>
+                    {{ form.documento_identidad }}
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.correo_electronico.id_for_label }}">
+                        <span class="icon">📧</span>{{ form.correo_electronico.label }}
+                    </label>
+                    {{ form.correo_electronico }}
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="{{ form.fecha_asistencia.id_for_label }}">
+                    <span class="icon">📅</span>{{ form.fecha_asistencia.label }}
+                </label>
+                {{ form.fecha_asistencia }}
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="{{ form.hora_ingreso.id_for_label }}">
+                        <span class="icon">🕐</span>{{ form.hora_ingreso.label }}
+                    </label>
+                    {{ form.hora_ingreso }}
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.hora_salida.id_for_label }}">
+                        <span class="icon">🕔</span>{{ form.hora_salida.label }}
+                    </label>
+                    {{ form.hora_salida }}
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="checkbox-group">
+                    {{ form.presente }}
+                    <label for="{{ form.presente.id_for_label }}" class="checkbox-label">
+                        <span class="icon">✅</span>{{ form.presente.label }}
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="{{ form.observaciones.id_for_label }}">
+                    <span class="icon">📝</span>{{ form.observaciones.label }}
+                </label>
+                {{ form.observaciones }}
+            </div>
+
+            <button type="submit" class="btn-submit">
+                Registrar Asistencia
+            </button>
+        </form>
+    </div>
+</body>
+</html>
